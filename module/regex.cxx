@@ -2,12 +2,11 @@
 module;
 
 #if defined(_WIN32) && __has_include(<windows.h>)
+//
+// This has to appear *before* import std; otherwise the compiler chokes.
+//
 #include <windows.h>
 #endif
-#include <cctype>
-#include <cstddef>
-#include <cwctype>
-#include <cassert>
 
 #ifdef __cpp_lib_modules
 import std;
@@ -50,6 +49,8 @@ import std.core;
 #endif
 #endif
 
+#include <cwctype>
+#include <assert.h>
 
 #if __has_include(<unicode/utypes.h>)
 #include <unicode/utypes.h>

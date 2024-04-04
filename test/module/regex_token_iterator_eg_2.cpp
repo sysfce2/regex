@@ -17,6 +17,8 @@
   */
 
 
+import boost.regex;
+
 #ifdef __cpp_lib_modules
 import std;
 #elif defined(MSVC_EXPERIMENTAL_STD_MODULE)
@@ -26,8 +28,6 @@ import std.core;
 #include <iostream>
 #include <iterator>
 #endif
-
-import boost.regex;
 
 boost::regex e("<\\s*A\\s+[^>]*href\\s*=\\s*\"([^\"]*)\"",
                boost::regex::normal | boost::regex::icase);
