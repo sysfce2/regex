@@ -148,7 +148,7 @@ jobs:
       - name: Grab install script
         run: wget https://apt.llvm.org/llvm.sh && chmod u+x llvm.sh
       - name: Install clang 18 packages
-        run: sudo ./llvm.sh 17 && clang++-17 --version
+        run: sudo ./llvm.sh 19 && clang++-19 --version
       - name: Checkout main boost
         run: git clone -b develop --depth 1 https://github.com/boostorg/boost.git ../boost-root
       - name: Update tools/boostdep
