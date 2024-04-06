@@ -170,7 +170,7 @@ jobs:
         run: CXX=clang++-18 ./config/clang.sh ./config/test_has_module_support.cpp ./config/has_module_support.cpp has_module_support
         working-directory: ../boost-root/libs/regex/test/module
       - name: Test
-        run: CXX=clang++-18 LIBRARIES="-licuuc -licudt -licuin" ./test.sh ./config/clang.sh
+        run: CXX=clang++-18 LIBRARIES="-licuuc -licudata -licui18n" ./test.sh ./config/clang.sh
         working-directory: ../boost-root/libs/regex/test/module
   macos:
     runs-on: macos-latest
