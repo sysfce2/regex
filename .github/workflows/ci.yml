@@ -376,6 +376,9 @@ jobs:
           commit-filter: '[skip ci];[ci skip];[CI SKIP];[SKIP CI];***CI SKIP***;***SKIP CI***;[apple];[Apple];[APPLE];[linux];[Linux];[LINUX]'
           commit-filter-separator: ';'
           fail-fast: true
+      - uses: TheMrMilchmann/setup-msvc-dev@v3
+        with:
+          arch: x64
       - name: Checkout main boost
         run: git clone -b develop --depth 1 https://github.com/boostorg/boost.git ../boost-root
       - name: Update tools/boostdep
@@ -402,9 +405,6 @@ jobs:
       - name: Test
         run: ..\..\..\b2 --hash %ARGS%
         working-directory: ../boost-root/libs/regex/test
-      - name: Module Test Setup
-        run: "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat"
-        working-directory: ../boost-root/libs/regex/test/module
       - name: Module Test
         run: msvc_test.bat
         working-directory: ../boost-root/libs/regex/test/module
