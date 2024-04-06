@@ -33,4 +33,4 @@ module_usage="$module_usage -fmodule-file=$cxx_module_name=$module_base.pcm $mod
 done
 
 # Build the actual executable:
-$CXX $CXXFLAGS $1 $module_usage -o $3 || exit 1
+$CXX $CXXFLAGS $1 $module_usage $LIBRARIES -o $3 || exit 1
