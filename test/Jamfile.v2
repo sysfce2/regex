@@ -110,7 +110,6 @@ run regress/$(R_SOURCE) ./noeh_test//boost_regex_noeh ../build//icu_options : : 
 compile test_consolidated.cpp ;
 
 build-project ../example ;
-build-project ./module ;
 
 # `quick` target (for CI)
 run quick.cpp ../build//boost_regex ;
