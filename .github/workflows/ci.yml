@@ -167,10 +167,10 @@ jobs:
         run: ./b2 headers
         working-directory: ../boost-root
       - name: Test Config
-        run: CXXFLAGS=clang++-18 ./config/clang.sh ./config/test_has_module_support.cpp ./config/has_module_support.cpp has_module_support
+        run: CXX=clang++-18 ./config/clang.sh ./config/test_has_module_support.cpp ./config/has_module_support.cpp has_module_support
         working-directory: ../boost-root/libs/regex/test/module
       - name: Test
-        run: CXXFLAGS=clang++-18 ./test.sh ./config/clang.sh
+        run: CXX=clang++-18 ./test.sh ./config/clang.sh
         working-directory: ../boost-root/libs/regex/test/module
   macos:
     runs-on: macos-latest
@@ -402,6 +402,9 @@ jobs:
       - name: Test
         run: ..\..\..\b2 --hash %ARGS%
         working-directory: ../boost-root/libs/regex/test
+      - name: Module Test Setup
+        run: "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat"
+        working-directory: ../boost-root/libs/regex/test/module
       - name: Module Test
         run: msvc_test.bat
         working-directory: ../boost-root/libs/regex/test/module
