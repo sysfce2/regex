@@ -145,10 +145,10 @@ jobs:
           commit-filter: '[skip ci];[ci skip];[CI SKIP];[SKIP CI];***CI SKIP***;***SKIP CI***;[windows];[Windows];[WINDOWS];[apple];[Apple];[APPLE]'
           commit-filter-separator: ';'
           fail-fast: true
-      - name: Add repository
-        run: sudo apt-add-repository -y "ppa:ubuntu-toolchain-r/test"
-      - name: Install packages
-        run: sudo apt install clang-18
+      - name: Grab install script
+        run: wget https://apt.llvm.org/llvm.sh && chmod u+x llvm.sh
+      - name: Install clang 18 packages
+        run: sudo ./llvm.sh 18 && clang++-18 --version
       - name: Checkout main boost
         run: git clone -b develop --depth 1 https://github.com/boostorg/boost.git ../boost-root
       - name: Update tools/boostdep
@@ -167,7 +167,7 @@ jobs:
         run: ./b2 headers
         working-directory: ../boost-root
       - name: Test
-        run: ./test.sh ./config/clang.sh
+        run: CXXFLAGS=clang++-18 ./test.sh ./config/clang.sh
         working-directory: ../boost-root/libs/regex/test/module
   macos:
     runs-on: macos-latest
