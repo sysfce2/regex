@@ -148,7 +148,7 @@ jobs:
       - name: Grab install script
         run: wget https://apt.llvm.org/llvm.sh && chmod u+x llvm.sh
       - name: Install clang 18 packages
-        run: sudo ./llvm.sh 19 && clang++-19 --version
+        run: sudo ./llvm.sh 18 && clang++-18 --version
       - name: Checkout main boost
         run: git clone -b develop --depth 1 https://github.com/boostorg/boost.git ../boost-root
       - name: Update tools/boostdep
@@ -166,6 +166,9 @@ jobs:
       - name: Generate headers
         run: ./b2 headers
         working-directory: ../boost-root
+      - name: Test Config
+        run: CXXFLAGS=clang++-18 ./config/clang.sh ./config/test_has_module_support.cpp ./config/has_module_support.cpp has_module_support
+        working-directory: ../boost-root/libs/regex/test/module
       - name: Test
         run: CXXFLAGS=clang++-18 ./test.sh ./config/clang.sh
         working-directory: ../boost-root/libs/regex/test/module
@@ -399,6 +402,9 @@ jobs:
       - name: Test
         run: ..\..\..\b2 --hash %ARGS%
         working-directory: ../boost-root/libs/regex/test
+      - name: Module Test
+        run: msvc_test.bat
+        working-directory: ../boost-root/libs/regex/test/module
   ubuntu-cmake-install:
     runs-on: ubuntu-20.04
     strategy:
