@@ -28,7 +28,11 @@ import std.core;
 #include <cstring>
 #endif
 
+#ifdef TEST_HEADERS
+#include <boost/regex.hpp>
+#else
 import boost.regex;
+#endif
 
 #ifdef BOOST_NO_STDC_NAMESPACE
 namespace std{ using ::memmove; }

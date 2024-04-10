@@ -25,7 +25,11 @@ import std.core;
 #include <iostream>
 #endif
 
+#ifdef TEST_HEADERS
+#include <boost/regex.hpp>
+#else
 import boost.regex;
+#endif
 
 
 bool validate_card_format(const std::string& s)

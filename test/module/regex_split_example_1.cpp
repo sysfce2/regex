@@ -27,7 +27,11 @@ import std.core;
 #include <iostream>
 #endif
 
+#ifdef TEST_HEADERS
+#include <boost/regex.hpp>
+#else
 import boost.regex;
+#endif
 
 unsigned tokenise(std::list<std::string>& l, std::string& s)
 {

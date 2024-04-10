@@ -28,7 +28,11 @@ import std.core;
 #include <iostream>
 #endif
 
+#ifdef TEST_HEADERS
+#include <boost/regex.hpp>
+#else
 import boost.regex;
+#endif
 
 boost::regex e("(\\d{3,4})[- ]?(\\d{4})[- ]?(\\d{4})[- ]?(\\d{4})");
 

@@ -28,7 +28,11 @@ import std.core;
 #include <cstring>
 #endif
 
+#ifdef TEST_HEADERS
+#include <boost/regex.hpp>
+#else
 import boost.regex;
+#endif
 
 // match some kind of html tag:
 boost::regex e("<[^>]*>");

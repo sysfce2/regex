@@ -19,8 +19,10 @@
 #ifndef BOOST_REGEX_V5_MATCH_FLAGS
 #define BOOST_REGEX_V5_MATCH_FLAGS
 
+#ifndef BOOST_REGEX_AS_MODULE
 #ifdef __cplusplus
 #  include <cstdint>
+#endif
 #endif
 
 #ifdef __cplusplus

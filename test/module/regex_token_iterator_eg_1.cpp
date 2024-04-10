@@ -26,7 +26,11 @@ import std.core;
 #include <string>
 #endif
 
+#ifdef TEST_HEADERS
+#include <boost/regex.hpp>
+#else
 import boost.regex;
+#endif
 
 using namespace std;
 

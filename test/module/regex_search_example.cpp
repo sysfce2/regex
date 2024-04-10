@@ -27,7 +27,11 @@ import std.core;
 #include <fstream>
 #endif
 
+#ifdef TEST_HEADERS
+#include <boost/regex.hpp>
+#else
 import boost.regex;
+#endif
 
 // purpose:
 // takes the contents of a file in the form of a string

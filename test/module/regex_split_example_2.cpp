@@ -28,7 +28,11 @@ import std.core;
 #include <iterator>
 #endif
 
+#ifdef TEST_HEADERS
+#include <boost/regex.hpp>
+#else
 import boost.regex;
+#endif
 
 boost::regex e("<\\s*A\\s+[^>]*href\\s*=\\s*\"([^\"]*)\"",
                boost::regex::normal | boost::regex::icase);

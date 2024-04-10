@@ -58,8 +58,10 @@
 #ifdef BOOST_REGEX_STANDALONE
 #ifndef BOOST_REGEX_AS_MODULE
 #include <cassert>
-#endif
 #  define BOOST_REGEX_ASSERT(x) assert(x)
+#else
+#  define BOOST_REGEX_ASSERT(x) do{ if(x == 0) { std::printf("%s:%d Assertion Failed", __FILE__, __LINE__); std::abort(); } }while(0)
+#endif
 #else
 #include <boost/assert.hpp>
 #  define BOOST_REGEX_ASSERT(x) BOOST_ASSERT(x)
@@ -302,8 +304,6 @@
  * If there are no exceptions then we must report critical-errors
  * the only way we know how; by terminating.
  */
-#include <cassert>
-
 #  define BOOST_REGEX_NOEH_ASSERT(x) assert(x);
 #else
 /*

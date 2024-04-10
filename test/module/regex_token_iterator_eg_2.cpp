@@ -16,8 +16,11 @@
   *   DESCRIPTION: regex_token_iterator example: spit out linked URL's.
   */
 
-
+#ifdef TEST_HEADERS
+#include <boost/regex.hpp>
+#else
 import boost.regex;
+#endif
 
 #ifdef __cpp_lib_modules
 import std;
@@ -28,7 +31,6 @@ import std.core;
 #include <iostream>
 #include <iterator>
 #endif
-
 boost::regex e("<\\s*A\\s+[^>]*href\\s*=\\s*\"([^\"]*)\"",
                boost::regex::normal | boost::regex::icase);
 
