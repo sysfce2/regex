@@ -1,12 +1,12 @@
 # copyright John Maddock 2003
-# Distributed under the Boost Software License, Version 1.0. 
-# (See accompanying file LICENSE_1_0.txt or copy at 
+# Distributed under the Boost Software License, Version 1.0.
+# (See accompanying file LICENSE_1_0.txt or copy at
 # http://www.boost.org/LICENSE_1_0.txt.
 
 project
     : requirements
       <source>/boost/timer//boost_timer
-      <threading>multi 
+      <threading>multi
       <link>shared:<define>BOOST_REGEX_DYN_LINK=1
       # There are unidentified linker problems on these platforms:
       <toolset>mipspro-7.4:<link>static
@@ -22,7 +22,7 @@ project
 
 rule regex-test-run ( sources + : input * : name * )
 {
-        return [ 
+        return [
            run
              # sources
              $(sources)
