@@ -5,6 +5,23 @@ module;
 #define BOOST_REGEX_USE_STD_MODULE
 #endif
 
+#if __has_include(<unicode/utypes.h>)
+
+#if !defined(BOOST_REGEX_WITH_ICU)
+
+#if defined(_MSC_FULL_VER)
+#pragma message "ICU headers are available but building the Regex module with ICU support is turned OFF.  Build with BOOST_REGEX_WITH_ICU=1 to turn it on, or BOOST_REGEX_WITH_ICU=0 to disable this message"
+#else
+# warning "ICU headers are available but building the Regex module with ICU support is turned OFF.  Build with BOOST_REGEX_WITH_ICU=1 to turn it on, or BOOST_REGEX_WITH_ICU=0 to disable this message"
+#endif
+
+#elif BOOST_REGEX_WITH_ICU
+#  define BOOST_REGEX_HAS_ICU_HEADERS
+#endif
+
+
+#endif
+
 #if defined(_WIN32) && __has_include(<windows.h>)
 #include <windows.h>
 #endif
@@ -52,7 +69,7 @@ module;
 #include <cwchar>
 #endif
 
-#if __has_include(<unicode/utypes.h>)
+#ifdef BOOST_REGEX_HAS_ICU_HEADERS
 #include <unicode/utypes.h>
 #include <unicode/uchar.h>
 #include <unicode/coll.h>
@@ -74,8 +91,12 @@ import std.core;
 #pragma warning(disable:5244)
 #endif
 
+#ifdef __clang__
+#pragma clang diagnostic ignored "-Winclude-angled-in-module-purview"
+#endif
+
 #include <boost/regex.hpp>
 
-#if __has_include(<unicode/utypes.h>)
+#ifdef BOOST_REGEX_HAS_ICU_HEADERS
 #include <boost/regex/icu.hpp>
 #endif

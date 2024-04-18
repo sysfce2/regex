@@ -41,7 +41,7 @@ inline unsigned int regex_grep(Predicate foo,
    match_results<BidiIterator> m;
    BOOST_REGEX_DETAIL_NS::perl_matcher<BidiIterator, match_allocator_type, traits> matcher(first, last, m, e, flags, first);
    unsigned int count = 0;
-   while(matcher.find())
+   while(BOOST_REGEX_DETAIL_NS::factory_find(matcher))
    {
       ++count;
       if(0 == foo(m))
@@ -56,7 +56,7 @@ inline unsigned int regex_grep(Predicate foo,
          // a non-NULL one at the same position:
          match_results<BidiIterator, match_allocator_type> m2(m);
          matcher.setf(match_not_null | match_continuous);
-         if(matcher.find())
+         if(BOOST_REGEX_DETAIL_NS::factory_find(matcher))
          {
             ++count;
             if(0 == foo(m))

@@ -36,7 +36,7 @@ bool regex_match(BidiIterator first, BidiIterator last,
                  match_flag_type flags = match_default)
 {
    BOOST_REGEX_DETAIL_NS::perl_matcher<BidiIterator, Allocator, traits> matcher(first, last, m, e, flags, first);
-   return matcher.match();
+   return BOOST_REGEX_DETAIL_NS::factory_match(matcher);
 }
 BOOST_REGEX_MODULE_EXPORT template <class iterator, class charT, class traits>
 bool regex_match(iterator first, iterator last, 

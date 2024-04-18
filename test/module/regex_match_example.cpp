@@ -16,9 +16,9 @@
   *   DESCRIPTION: ftp based regex_match example.
   */
   
-#ifdef __cpp_lib_modules
+#if (defined(__cpp_lib_modules) || (defined(_MSC_FULL_VER) && (_MSC_FULL_VER >= 193933523))) && !defined(TEST_HEADERS)
 import std;
-#elif defined(MSVC_EXPERIMENTAL_STD_MODULE)
+#elif defined(MSVC_EXPERIMENTAL_STD_MODULE) && !defined(TEST_HEADERS)
 import std.core;
 #else
 #include <cstdlib>
@@ -33,7 +33,6 @@ import std.core;
 import boost.regex;
 #endif
 
-using namespace std;
 using namespace boost;
 
 regex expression("^([0-9]+)(\\-| |$)(.*)$");
@@ -52,7 +51,7 @@ int process_ftp(const char* response, std::string* msg)
       // what[3] contains the text message.
       if(msg)
          msg->assign(what[3].first, what[3].second);
-      return ::atoi(what[1].first);
+      return std::atoi(what[1].first);
    }
    // failure did not match
    if(msg)
@@ -62,6 +61,7 @@ int process_ftp(const char* response, std::string* msg)
 
 int main(int argc, const char*[])
 {
+   using namespace std;
    std::string in, out;
    do
    {

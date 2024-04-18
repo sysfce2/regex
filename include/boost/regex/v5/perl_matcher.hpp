@@ -558,6 +558,33 @@ private:
 #endif
 };
 
+template <class Matcher>
+inline bool factory_match(Matcher& m)
+{
+   return m.match();
+}
+template <class Matcher>
+inline bool factory_find(Matcher& m)
+{
+   return m.find();
+}
+
+#ifdef BOOST_REGEX_AS_MODULE
+bool factory_match(perl_matcher<const char*, match_results<const char*>::allocator_type, regex::traits_type>& m);
+bool factory_match(perl_matcher<const wchar_t*, match_results<const wchar_t*>::allocator_type, wregex::traits_type>& m);
+bool factory_match(perl_matcher<std::string::const_iterator, match_results<std::string::const_iterator>::allocator_type, regex::traits_type>& m);
+bool factory_match(perl_matcher<std::wstring::const_iterator, match_results<std::wstring::const_iterator>::allocator_type, wregex::traits_type>& m);
+bool factory_match(perl_matcher<std::string::iterator, match_results<std::string::iterator>::allocator_type, regex::traits_type>& m);
+bool factory_match(perl_matcher<std::wstring::iterator, match_results<std::wstring::iterator>::allocator_type, wregex::traits_type>& m);
+
+bool factory_find(perl_matcher<const char*, match_results<const char*>::allocator_type, regex::traits_type>& m);
+bool factory_find(perl_matcher<const wchar_t*, match_results<const wchar_t*>::allocator_type, wregex::traits_type>& m);
+bool factory_find(perl_matcher<std::string::const_iterator, match_results<std::string::const_iterator>::allocator_type, regex::traits_type>& m);
+bool factory_find(perl_matcher<std::wstring::const_iterator, match_results<std::wstring::const_iterator>::allocator_type, wregex::traits_type>& m);
+bool factory_find(perl_matcher<std::string::iterator, match_results<std::string::iterator>::allocator_type, regex::traits_type>& m);
+bool factory_find(perl_matcher<std::wstring::iterator, match_results<std::wstring::iterator>::allocator_type, wregex::traits_type>& m);
+#endif
+
 } // namespace BOOST_REGEX_DETAIL_NS
 
 #ifdef BOOST_REGEX_MSVC

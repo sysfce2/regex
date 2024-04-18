@@ -650,22 +650,38 @@ private:
 // and are designed to provide the strong exception guarantee
 // (in the event of a throw, the state of the object remains unchanged).
 //
+
+namespace detail
+{
+   template <class charT, class F, class Traits>
+   std::shared_ptr<BOOST_REGEX_DETAIL_NS::basic_regex_implementation<charT, Traits> > create_implemenation(const charT* p1, const charT* p2, F f, std::shared_ptr<boost::regex_traits_wrapper<Traits> > ptraits)
+   {
+      std::shared_ptr<BOOST_REGEX_DETAIL_NS::basic_regex_implementation<charT, Traits> > result;
+      if (!ptraits.get())
+      {
+         result = std::shared_ptr<BOOST_REGEX_DETAIL_NS::basic_regex_implementation<charT, Traits> >(new BOOST_REGEX_DETAIL_NS::basic_regex_implementation<charT, Traits>());
+      }
+      else
+      {
+         result = std::shared_ptr<BOOST_REGEX_DETAIL_NS::basic_regex_implementation<charT, Traits> >(new BOOST_REGEX_DETAIL_NS::basic_regex_implementation<charT, Traits>(ptraits));
+      }
+      result->assign(p1, p2, f);
+      return result;
+   }
+#ifdef BOOST_REGEX_AS_MODULE
+   std::shared_ptr<BOOST_REGEX_DETAIL_NS::basic_regex_implementation<char, basic_regex<char>::traits_type> > 
+      create_implemenation(const char* p1, const char* p2, basic_regex<char>::flag_type f, std::shared_ptr<boost::regex_traits_wrapper<basic_regex<char>::traits_type> > ptraits);
+   std::shared_ptr<BOOST_REGEX_DETAIL_NS::basic_regex_implementation<wchar_t, basic_regex<wchar_t>::traits_type> > 
+      create_implemenation(const wchar_t* p1, const wchar_t* p2, basic_regex<wchar_t>::flag_type f, std::shared_ptr<boost::regex_traits_wrapper<basic_regex<wchar_t>::traits_type> > ptraits);
+#endif
+}
+
 template <class charT, class traits>
 basic_regex<charT, traits>& basic_regex<charT, traits>::do_assign(const charT* p1,
                         const charT* p2,
                         flag_type f)
 {
-   std::shared_ptr<BOOST_REGEX_DETAIL_NS::basic_regex_implementation<charT, traits> > temp;
-   if(!m_pimpl.get())
-   {
-      temp = std::shared_ptr<BOOST_REGEX_DETAIL_NS::basic_regex_implementation<charT, traits> >(new BOOST_REGEX_DETAIL_NS::basic_regex_implementation<charT, traits>());
-   }
-   else
-   {
-      temp = std::shared_ptr<BOOST_REGEX_DETAIL_NS::basic_regex_implementation<charT, traits> >(new BOOST_REGEX_DETAIL_NS::basic_regex_implementation<charT, traits>(m_pimpl->m_ptraits));
-   }
-   temp->assign(p1, p2, f);
-   temp.swap(m_pimpl);
+   m_pimpl = detail::create_implemenation(p1, p2, f, m_pimpl.get() ? m_pimpl->m_ptraits : std::shared_ptr<boost::regex_traits_wrapper<traits> >());
    return *this;
 }
 
