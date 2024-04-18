@@ -1,6 +1,12 @@
 
-#if defined(__cpp_lib_modules) || (defined(_MSC_FULL_VER) && (_MSC_FULL_VER >= 193933523))
+module;
+
+#if defined(__cpp_lib_modules) || (defined(_MSC_FULL_VER) && (_MSC_FULL_VER >= 193933524))
 #define BOOST_REGEX_USE_STD_MODULE
+#endif
+
+#ifndef BOOST_REGEX_USE_STD_MODULE
+#include <string>
 #endif
 
 module boost.regex;
