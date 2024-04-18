@@ -3,22 +3,11 @@
 #define BOOST_REGEX_USE_STD_MODULE
 #endif
 
-#ifndef BOOST_REGEX_USE_STD_MODULE
-module;
-
-#include <memory>
-
-#endif
-
 #ifndef BOOST_REGEX_DETAIL_NS
 #define BOOST_REGEX_DETAIL_NS re_detail_600
 #endif
 
 module boost.regex;
-
-#ifdef BOOST_REGEX_USE_STD_MODULE
-import std;
-#endif
 
 namespace boost::detail {
 

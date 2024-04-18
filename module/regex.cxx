@@ -67,6 +67,7 @@ module;
 
 #if !defined(BOOST_REGEX_USE_STD_MODULE) && defined(MSVC_EXPERIMENTAL_STD_MODULE)
 #include <cwchar>
+#include <cwctype>
 #endif
 
 #ifdef BOOST_REGEX_HAS_ICU_HEADERS

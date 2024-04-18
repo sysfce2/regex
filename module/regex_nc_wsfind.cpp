@@ -3,18 +3,7 @@
 #define BOOST_REGEX_USE_STD_MODULE
 #endif
 
-#ifndef BOOST_REGEX_USE_STD_MODULE
-module;
-
-#include <string>
-
-#endif
-
 module boost.regex;
-
-#ifdef BOOST_REGEX_USE_STD_MODULE
-import std;
-#endif
 
 namespace boost::re_detail_600 {
 
