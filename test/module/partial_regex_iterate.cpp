@@ -16,7 +16,7 @@
   *   DESCRIPTION: Search example using partial matches.
   */
 
-#if (defined(__cpp_lib_modules) || (defined(_MSC_FULL_VER) && (_MSC_FULL_VER >= 193933524))) && !defined(TEST_HEADERS)
+#if (defined(__cpp_lib_modules) || (defined(_MSC_FULL_VER) && (_MSC_FULL_VER >= 193933523))) && !defined(TEST_HEADERS)
 import std;
 #elif defined(MSVC_EXPERIMENTAL_STD_MODULE) && !defined(TEST_HEADERS)
 import std.core;
