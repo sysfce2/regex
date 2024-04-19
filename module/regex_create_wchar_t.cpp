@@ -15,6 +15,10 @@ module;
 
 module boost.regex;
 
+#if !defined(BOOST_REGEX_USE_STD_MODULE) && defined(MSVC_EXPERIMENTAL_STD_MODULE)
+import std.core;
+#endif
+
 namespace boost::detail {
 
    std::shared_ptr<BOOST_REGEX_DETAIL_NS::basic_regex_implementation<wchar_t, basic_regex<wchar_t>::traits_type> >

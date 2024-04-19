@@ -11,6 +11,10 @@ module;
 
 module boost.regex;
 
+#if !defined(BOOST_REGEX_USE_STD_MODULE) && defined(MSVC_EXPERIMENTAL_STD_MODULE)
+import std.core;
+#endif
+
 namespace boost::re_detail_600 {
 
    bool factory_match(perl_matcher<std::string::iterator, match_results<std::string::iterator>::allocator_type, regex::traits_type>& m)
