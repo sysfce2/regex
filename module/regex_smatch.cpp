@@ -5,7 +5,7 @@ module;
 #define BOOST_REGEX_USE_STD_MODULE
 #endif
 
-#ifndef BOOST_REGEX_USE_STD_MODULE
+#if !defined(BOOST_REGEX_USE_STD_MODULE) && !defined(MSVC_EXPERIMENTAL_STD_MODULE)
 #include <string>
 #endif
 
