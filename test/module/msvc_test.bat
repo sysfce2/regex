@@ -18,9 +18,10 @@ for %%f in (*.cpp) do (
 
 time < nul
 
-for %%f in (*.cpp) do (
-   cl /DTEST_HEADERS /std:c++latest /EHsc /nologo /W4 /I ..\..\..\.. %%f || exit 1
-)
+rem uncomment this section to test/time non-module build:
+rem for %%f in (*.cpp) do (
+rem cl /DTEST_HEADERS /std:c++latest /EHsc /nologo /W4 /I ..\..\..\.. %%f || exit 1
+rem )
 
-time < nul
+rem time < nul
 
