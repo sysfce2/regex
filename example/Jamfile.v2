@@ -5,7 +5,7 @@
 
 project
     : requirements
-      <source>/boost/timer//boost_timer
+      <library>/boost/timer//boost_timer
       <threading>multi
       <link>shared:<define>BOOST_REGEX_DYN_LINK=1
       # There are unidentified linker problems on these platforms:
