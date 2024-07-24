@@ -5,16 +5,18 @@
 
 require-b2 5.2 ;
 
+constant boost_dependencies :
+    /boost/assert//boost_assert
+    /boost/concept_check//boost_concept_check
+    /boost/config//boost_config
+    /boost/core//boost_core
+    /boost/predef//boost_predef
+    /boost/static_assert//boost_static_assert
+    /boost/throw_exception//boost_throw_exception
+    /boost/type_traits//boost_type_traits ;
+
 project /boost/regex
     : common-requirements
-        <library>/boost/assert//boost_assert
-        <library>/boost/concept_check//boost_concept_check
-        <library>/boost/config//boost_config
-        <library>/boost/core//boost_core
-        <library>/boost/predef//boost_predef
-        <library>/boost/static_assert//boost_static_assert
-        <library>/boost/throw_exception//boost_throw_exception
-        <library>/boost/type_traits//boost_type_traits
         <include>include
     ;
 
@@ -26,3 +28,4 @@ explicit
 call-if : boost-library regex
     : install boost_regex
     ;
+

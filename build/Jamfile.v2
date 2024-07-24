@@ -10,6 +10,7 @@ import errors ;
 project : requirements
    # default to all warnings on:
    <warnings>all
+   : common-requirements <library>$(boost_dependencies)
    ;
 
 local disable-icu = [ MATCH (--disable-icu) : [ modules.peek : ARGV ] ] ;
