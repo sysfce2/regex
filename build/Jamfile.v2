@@ -7,10 +7,15 @@ import modules ;
 import testing ;
 import errors ;
 
+constant boost_dependencies_private :
+    /boost/core//boost_core
+    ;
+
 project : requirements
    # default to all warnings on:
    <warnings>all
    : common-requirements <library>$(boost_dependencies)
+   : requirements <library>$(boost_dependencies_private)
    ;
 
 local disable-icu = [ MATCH (--disable-icu) : [ modules.peek : ARGV ] ] ;
