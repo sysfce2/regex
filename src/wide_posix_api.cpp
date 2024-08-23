@@ -169,7 +169,7 @@ BOOST_REGEX_DECL regsize_t BOOST_REGEX_CCALL regerrorW(int code, const regex_tW*
       {
          result = std::wcslen(wnames[code]) + 1;
          if(buf_size >= result)
-#if BOOST_WORKAROUND(BOOST_MSVC, >= 1400) && !defined(_WIN32_WCE) && !defined(UNDER_CE)
+#if (BOOST_WORKAROUND(BOOST_MSVC, >= 1400) && !defined(_WIN32_WCE) && !defined(UNDER_CE)) || (defined(BOOST_CLANG) && defined(_MSC_VER))
             ::wcscpy_s(buf, buf_size, wnames[code]);
 #else
             std::wcscpy(buf, wnames[code]);
