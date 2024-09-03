@@ -11,9 +11,8 @@ constant boost_dependencies_private :
     /boost/core//boost_core
     ;
 
-project : requirements
-   # default to all warnings on:
-   <warnings>all
+project
+   : default-build <warnings>all
    : common-requirements <library>$(boost_dependencies)
    : requirements <library>$(boost_dependencies_private)
    ;
