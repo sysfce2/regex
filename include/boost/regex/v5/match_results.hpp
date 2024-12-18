@@ -24,8 +24,10 @@
 #include <boost/regex/v5/basic_regex.hpp>
 #include <boost/regex/v5/regex_format.hpp>
 
+#ifndef BOOST_REGEX_AS_MODULE
 #include <string>
 #include <vector>
+#endif
 
 namespace boost{
 #ifdef BOOST_REGEX_MSVC
@@ -45,7 +47,7 @@ class named_subexpressions;
 
 }
 
-template <class BidiIterator, class Allocator>
+BOOST_REGEX_MODULE_EXPORT template <class BidiIterator, class Allocator>
 class match_results
 { 
 private:
@@ -674,13 +676,13 @@ void  match_results<BidiIterator, Allocator>::maybe_assign(const match_results<B
       *this = m;
 }
 
-template <class BidiIterator, class Allocator>
+BOOST_REGEX_MODULE_EXPORT template <class BidiIterator, class Allocator>
 void swap(match_results<BidiIterator, Allocator>& a, match_results<BidiIterator, Allocator>& b)
 {
    a.swap(b);
 }
 
-template <class charT, class traits, class BidiIterator, class Allocator>
+BOOST_REGEX_MODULE_EXPORT template <class charT, class traits, class BidiIterator, class Allocator>
 std::basic_ostream<charT, traits>&
    operator << (std::basic_ostream<charT, traits>& os,
                 const match_results<BidiIterator, Allocator>& s)

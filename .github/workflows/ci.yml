@@ -135,6 +135,41 @@ jobs:
       - name: Test
         run: ../../../b2 toolset=$TOOLSET define=CI_SUPPRESS_KNOWN_ISSUES define=SLOW_COMPILER
         working-directory: ../boost-root/libs/regex/test
+  ubuntu-jammy-clang-18-modules:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
+      - uses: mstachniuk/ci-skip@v1
+        with:
+          commit-filter: '[skip ci];[ci skip];[CI SKIP];[SKIP CI];***CI SKIP***;***SKIP CI***;[windows];[Windows];[WINDOWS];[apple];[Apple];[APPLE]'
+          commit-filter-separator: ';'
+          fail-fast: true
+      - name: Grab install script
+        run: wget https://apt.llvm.org/llvm.sh && chmod u+x llvm.sh
+      - name: Install clang 18 packages
+        run: sudo ./llvm.sh 18 && clang++-18 --version
+      - name: Checkout main boost
+        run: git clone -b develop --depth 1 https://github.com/boostorg/boost.git ../boost-root
+      - name: Update tools/boostdep
+        run: git submodule update --init tools/boostdep
+        working-directory: ../boost-root
+      - name: Copy files
+        run: cp -r $GITHUB_WORKSPACE/* libs/regex
+        working-directory: ../boost-root
+      - name: Install deps
+        run: python tools/boostdep/depinst/depinst.py -I example -g "--jobs 3" regex
+        working-directory: ../boost-root
+      - name: Bootstrap
+        run: ./bootstrap.sh
+        working-directory: ../boost-root
+      - name: Generate headers
+        run: ./b2 headers
+        working-directory: ../boost-root
+      - name: Test
+        run: CXX=clang++-18 LIBRARIES="-licuuc -licudata -licui18n" ./test_clang.sh
+        working-directory: ../boost-root/libs/regex/test/module
   macos:
     runs-on: macos-latest
     strategy:
@@ -339,6 +374,9 @@ jobs:
           commit-filter: '[skip ci];[ci skip];[CI SKIP];[SKIP CI];***CI SKIP***;***SKIP CI***;[apple];[Apple];[APPLE];[linux];[Linux];[LINUX]'
           commit-filter-separator: ';'
           fail-fast: true
+      - uses: TheMrMilchmann/setup-msvc-dev@v3
+        with:
+          arch: x64
       - name: Checkout main boost
         run: git clone -b develop --depth 1 https://github.com/boostorg/boost.git ../boost-root
       - name: Update tools/boostdep
@@ -365,6 +403,9 @@ jobs:
       - name: Test
         run: ..\..\..\b2 --hash %ARGS%
         working-directory: ../boost-root/libs/regex/test
+      - name: Module Test
+        run: msvc_test.bat
+        working-directory: ../boost-root/libs/regex/test/module
   ubuntu-cmake-install:
     runs-on: ubuntu-20.04
     strategy:

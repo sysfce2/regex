@@ -38,10 +38,12 @@
 #endif
 #endif
 
+#ifndef BOOST_REGEX_AS_MODULE
 #ifdef __cplusplus
 #include <cstddef>
 #else
 #include <stddef.h>
+#endif
 #endif
 
 /* include these defs only for POSIX compatablity */

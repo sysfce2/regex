@@ -30,8 +30,10 @@
 
 #include <boost/regex/v5/basic_regex.hpp>
 
+#ifndef BOOST_REGEX_AS_MODULE
 #include <vector>
 #include <set>
+#endif
 
 namespace boost{
 
@@ -220,8 +222,10 @@ public:
          m_icase = static_cast<bool>(f & regbase::icase);
       }
    }
-   re_syntax_base* append_state(syntax_element_type t, std::size_t s = sizeof(re_syntax_base));
-   re_syntax_base* insert_state(std::ptrdiff_t pos, syntax_element_type t, std::size_t s = sizeof(re_syntax_base));
+   re_syntax_base* append_state(syntax_element_type t, std::size_t s);
+   re_syntax_base* append_state(syntax_element_type t) { return append_state(t, sizeof(re_syntax_base)); }
+   re_syntax_base* insert_state(std::ptrdiff_t pos, syntax_element_type t, std::size_t s);
+   re_syntax_base* insert_state(std::ptrdiff_t pos, syntax_element_type t) { return insert_state(pos, t, sizeof(re_syntax_base)); }
    re_literal* append_literal(charT c);
    re_syntax_base* append_set(const basic_char_set<charT, traits>& char_set);
    re_syntax_base* append_set(const basic_char_set<charT, traits>& char_set, std::integral_constant<bool, false>*);

@@ -21,10 +21,12 @@
 
 #include <boost/regex/v5/basic_regex_creator.hpp>
 
+#ifndef BOOST_REGEX_AS_MODULE
 #include <climits>
 #include <cstdint>
 #include <limits>
 #include <type_traits>
+#endif
 
 namespace boost{
 namespace BOOST_REGEX_DETAIL_NS{
