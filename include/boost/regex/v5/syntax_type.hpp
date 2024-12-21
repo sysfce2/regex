@@ -19,6 +19,8 @@
 #ifndef BOOST_REGEX_SYNTAX_TYPE_HPP
 #define BOOST_REGEX_SYNTAX_TYPE_HPP
 
+#include <boost/regex/config.hpp>
+
 namespace boost{
 namespace regex_constants{
 

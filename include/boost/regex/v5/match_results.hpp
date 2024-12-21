@@ -227,6 +227,10 @@ public:
    {
       if(m_is_singular && m_subs.empty())
          raise_logic_error();
+      
+      if (sub >= INT_MAX - 2 )
+         return m_null;
+
       sub += 2;
       if(sub < (int)m_subs.size() && (sub >= 0))
       {
